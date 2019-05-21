@@ -33,7 +33,7 @@
     state: absent
 
 - name: Creates directory
-  file: 
+  file:
     path: "/data/prometheus/"
     state: directory
     owner: "{{userId}}"
@@ -41,7 +41,7 @@
     mode: 0755
 
 - name: Creates directory
-  file: 
+  file:
     path: "/etc/prometheus/"
     state: directory
     owner: "{{userId}}"
@@ -58,11 +58,10 @@
     src: "{{ role_path }}/files/alertrules.yml"
     dest: /etc/prometheus/alert.rules.yml
 
-- name: Copy systemd init file
+- name: Copy init file
   template:
     src: init.service.j2
-    dest: /etc/systemd/system/prometheus.service
-  notify: systemd_reload
+    dest: /etc/init.d/prometheus
 
 - name: Start prometheus service
   service:

@@ -35,7 +35,7 @@
 - name: Copy systemd init file
   template:
     src: init.service.j2
-    dest: /etc/systemd/system/node_exporter.service
+    dest: /etc/init.d/node_exporter
 
 - name: Start node_exporter service
   service:

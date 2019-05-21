@@ -15,16 +15,18 @@ scrape_configs:
         - '{{ host }}:9100'
       {% endif %}
       {% endfor %}
+    - job_name: 'batch_flow_api'
+      static_configs:
+      - targets: ['localhost:3333']
+
+    - job_name: 'user_stats'
+      metrics_path: '/usage/metrics'
+      static_configs:
+      - targets: ['localhost:3434']
 
 rule_files:
-  - alert.rules.yml
 
 alerting:
   alertmanagers:
   - static_configs:
     - targets:
-    {% for host in groups['alertmanager'] %}
-    {% if inventory_hostname != host %}
-      - '{{ host }}:9093'
-    {% endif %}
-    {% endfor %}
