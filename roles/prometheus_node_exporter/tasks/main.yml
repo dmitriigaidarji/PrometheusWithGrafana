@@ -50,4 +50,4 @@
     status_code: 200
 
 - name: Enable on boot
-  command: chkconfig --add node_exporter
+  command: chkconfig --add /etc/init.d/node_exporter

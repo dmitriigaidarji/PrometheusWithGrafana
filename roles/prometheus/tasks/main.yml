@@ -71,4 +71,4 @@
     status_code: 200
 
 - name: Enable on boot
-  command: chkconfig --add prometheus
+  command: chkconfig --add /etc/init.d/prometheus
