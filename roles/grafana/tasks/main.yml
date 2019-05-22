@@ -17,6 +17,9 @@
 
 - name: "Check if Grafana is accessible."
   uri:
-    url: http://127.0.0.1:3020
+    url: http://127.0.0.1:3020/login/
     method: GET
     status_code: 200
+
+- name: Enable on boot
+  command: chkconfig --add grafana-server

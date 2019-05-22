@@ -37,14 +37,17 @@
     src: init.service.j2
     dest: /etc/init.d/node_exporter
 
-- name: Start node_exporter service
-  service:
-    name: node_exporter
-    state: started
-    enabled: yes
+- name: Changing perm of init script, adding "+x"
+  file: dest=/etc/init.d/node_exporter mode=a+x
+
+- name: Execute the script
+  command: sh /etc/init.d/node_exporter start
 
 - name: Check if node exporter emits metrices
   uri:
     url: http://127.0.0.1:9100/metrics
     method: GET
     status_code: 200
+
+- name: Enable on boot
+  command: chkconfig --add node_exporter
